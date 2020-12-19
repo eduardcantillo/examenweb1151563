@@ -88,7 +88,7 @@ public class SorteoController {
 		nf.setGroupingUsed(false);
 		nf.setMaximumIntegerDigits(digitosNumeros);
 		int number=-1;
-		for(;number>= cantidad;) {
+		for(int i=0;i<digitos;i++) {
 			number++;
 			arr=new ArrayList<Numero>();
 			Boleta boleta=new Boleta();
