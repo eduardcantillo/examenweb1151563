@@ -77,6 +77,7 @@ public class SorteoController {
 	
 	@GetMapping("/sorteo/generarBoletas/{id}")
 	public String GenerarBoleta(@PathVariable (name="id") int id) {
+		logger.info("Entra");
 		Sorteo sorteo=sorteoDao.findById(id);
 		int digitos =sorteo.getNumeros();
 		int cantidad=sorteo.getBoletas();
@@ -91,7 +92,7 @@ public class SorteoController {
 		nf.setGroupingUsed(false);
 		nf.setMaximumIntegerDigits(digitosNumeros);
 		int number=-1;
-		for(;number>= cantidad;) {
+		for(int i=0;number>= cantidad;i++) {
 			number++;
 			arr=new ArrayList<Numero>();
 			Boleta boleta=new Boleta();
@@ -106,6 +107,8 @@ public class SorteoController {
 			
 			boleta.setNumeros(arr);
 			boleta.setSorteoBean(sorteo);
+			boletaDao.save(boleta);
+			
 			boleta=null;
 			
 			}
