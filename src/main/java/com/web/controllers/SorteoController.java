@@ -81,18 +81,14 @@ public class SorteoController {
 		Sorteo sorteo=sorteoDao.findById(id);
 		int digitos =sorteo.getNumeros();
 		int cantidad=sorteo.getBoletas();
-		
-		
 		int digitosNumeros=String.valueOf(""+(digitos*cantidad)).length();
-		
 		List<Numero> arr;
-		
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(digitosNumeros); 
 		nf.setGroupingUsed(false);
 		nf.setMaximumIntegerDigits(digitosNumeros);
 		int number=-1;
-		for(int i=0;number>= cantidad;i++) {
+		for(;number>= cantidad;) {
 			number++;
 			arr=new ArrayList<Numero>();
 			Boleta boleta=new Boleta();
