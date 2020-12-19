@@ -76,29 +76,40 @@ public class SorteoController {
 	}
 	
 	@GetMapping("/sorteo/generarBoletas/{id}")
-	public String GenerarBoleta(@PathVariable (name="id") int id,Model model) {
+	public String GenerarBoleta(@PathVariable (name="id") int id) {
 		Sorteo sorteo=sorteoDao.findById(id);
+		int digitos =sorteo.getNumeros();
+		int cantidad=sorteo.getBoletas();
 		
-		Boleta boleta=new Boleta();
-		boleta.setSorteoBean(sorteo);
 		
+		int digitosNumeros=String.valueOf(""+(digitos*cantidad)).length();
 		
-		List<Numero> arr=new ArrayList<Numero>();
+		List<Numero> arr;
 		
 		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumIntegerDigits(sorteo.getNumeros()); 
+		nf.setMinimumIntegerDigits(digitosNumeros); 
 		nf.setGroupingUsed(false);
-		nf.setMaximumIntegerDigits(sorteo.getNumeros());
-		boletaDao.save(boleta);
-		for(int i=0; i<sorteo.getBoletas();i++) {
+		nf.setMaximumIntegerDigits(digitosNumeros);
+		int number=-1;
+		for(;number>= cantidad;) {
+			number++;
+			arr=new ArrayList<Numero>();
+			Boleta boleta=new Boleta();
+			boletaDao.save(boleta);
 			
-			numeroDao.save(new Numero(nf.format(i),boleta));
+			for(int j=0;j<digitos || number>=cantidad;j++) {
+				
+				arr.add(numeroDao.save(new Numero(nf.format(number),boleta)));
+				number++;
 			}
-		
-		
-		boletaDao.save(boleta);
-		
-		model.addAttribute("generado", true);
+			
+			
+			boleta.setNumeros(arr);
+			boleta.setSorteoBean(sorteo);
+			boleta=null;
+			
+			}
+	
 		
 		return "redirect:/listar";
 	}

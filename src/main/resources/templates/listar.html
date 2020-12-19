@@ -33,9 +33,9 @@
 							<td th:text="${sorteo.numeros}"></td>
 							<td th:text="${sorteo.maximo}"></td>
 							<td>
-								<a th:if="${sorteo.boletasSet==null}" th:href="@{/persona/registrar/} + ${sorteo.id}"> <button class="btn btn-primary">Generar Boletas</button></a>
-								<a th:if="${sorteo.boletasSet=null}" th:href="@{/persona/registrar/}+${sorteo.id}"> <button class="btn btn-primary">Registrar persona</button></a>
-								<a th:if="${sorteo.boletasSet=null}" th:href="@{/sorteo/generarBoletas/}+${sorteo.id}"> <button class="btn btn-primary">Realizar Sorteo</button></a>
+								<a th:if="${!sorteo.boletasSet.isEmpty}" th:href="@{/persona/registrar/} + ${sorteo.id}"> <button class="btn btn-primary">Realizar Sorteo</button></a>
+								<a th:if="${!sorteo.boletasSet.isEmpty}" th:href="@{/persona/registrar/}+${sorteo.id}"> <button class="btn btn-primary">Registrar persona</button></a>
+								<a th:if="${sorteo.boletasSet.isEmpty}" th:href="@{/sorteo/generarBoletas/}+${sorteo.id}"> <button class="btn btn-primary">generar Boleta</button></a>
 							</td>
 							
 						</tr>

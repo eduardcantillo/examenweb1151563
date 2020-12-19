@@ -2,9 +2,12 @@ package com.web.entities;
 
 import java.text.NumberFormat;
 
+
+
 public class prueba {
 
 	public static void main(String[] args) {
+		
 		
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(4); 
